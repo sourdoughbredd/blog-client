@@ -3,8 +3,15 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: left;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* HOME */
 
 .post-card-container {
   display: grid;
@@ -28,4 +35,34 @@
 
 .post-card h3 {
   margin: 0;
+}
+
+/* POST */
+
+.post-content-container h1 {
+  margin: 0;
+}
+
+.comments-container h2 {
+  margin: 0;
+}
+
+.comments-container {
+  margin-top: 40px;
+}
+
+.comments-container textarea {
+  resize: vertical;
+  padding: 8px;
+}
+
+.comments-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px;
+}
+
+.comments-container button {
+  width: 100px;
 }
