@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import { fetchPost, fetchComments } from "../api";
+import { AuthContext } from "../context/authContext";
 
 // Utils
 function formatDate(timestamp) {
@@ -48,12 +49,18 @@ const CommentForm = () => {
 };
 
 const Comments = ({ comments }) => {
+  const { authenticated } = useContext(AuthContext);
+
   return (
     <div className="comments-container">
       <h2>Comments</h2>
-      <CommentForm />
+      {authenticated ? (
+        <CommentForm />
+      ) : (
+        <p>You must be logged in to leave a comment</p>
+      )}
       {comments.map((comment) => (
-        <>
+        <div key={comment._id}>
           <hr />
           <div className="comment-card">
             <p>{comment.text}</p>
@@ -61,14 +68,14 @@ const Comments = ({ comments }) => {
               by {comment.user.username} on {formatDate(comment.timestamp)}{" "}
             </p>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
 };
 
 // Page
-const Post = () => {
+const Post = ({ isLoggedIn }) => {
   const { postId } = useParams();
 
   // Fetch post
@@ -98,6 +105,7 @@ const Post = () => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
   const [commentsError, setCommentsError] = useState(null);
+
   useEffect(() => {
     async function getComments() {
       try {
@@ -130,7 +138,7 @@ const Post = () => {
   return (
     <>
       <PostContent post={post} />
-      <Comments comments={comments} />
+      <Comments isLoggedIn={isLoggedIn} comments={comments} />
     </>
   );
 };
