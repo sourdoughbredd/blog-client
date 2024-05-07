@@ -44,12 +44,32 @@ export async function login(username, password) {
   return await response.json();
 }
 
+// Logout function
+export async function logout(refreshToken) {
+  const response = await fetch(`${BASE_URL}/users/logout`, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({ refreshToken }),
+  });
+  return await response.json();
+}
+
 // Signup function
-export async function signup(username, password) {
+export async function signup(email, username, password) {
   const response = await fetch(`${BASE_URL}/users/signup`, {
     method: "POST",
     headers: getHeaders(),
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, username, password }),
+  });
+  return await response.json();
+}
+
+// Refresh jwt access token
+export async function refreshAccessToken(refreshToken) {
+  const response = await fetch(`${BASE_URL}/users/token`, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({ refreshToken }),
   });
   return await response.json();
 }
