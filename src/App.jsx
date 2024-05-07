@@ -1,5 +1,6 @@
 import "./App.css";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./context/authContext";
 
 // Components/Pages
 import Header from "./components/Header";
@@ -11,12 +12,12 @@ import Signup from "./pages/Signup";
 // App Layout Component with context providers
 const Layout = () => {
   return (
-    <>
+    <AuthProvider>
       <Header />
       <div id="app-main-content-container">
         <Outlet />
       </div>
-    </>
+    </AuthProvider>
   );
 };
 
