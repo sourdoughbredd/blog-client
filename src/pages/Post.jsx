@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import { fetchPost, fetchComments } from "../api";
 import { AuthContext } from "../context/authContext";
+import { addComment as sendPostComment } from "../api";
 
 // Utils
 function formatDate(timestamp) {
@@ -29,10 +30,27 @@ const PostContent = ({ post }) => {
   );
 };
 
+const postComment = async (event, postId) => {
+  event.preventDefault();
+  // Extract comment text
+  const formData = new FormData(event.target);
+  const text = formData.get("text");
+  // Send to server
+  const response = await sendPostComment(postId, text);
+  if (response.error) {
+    alert("Error posting comment. Please try again later.");
+  } else {
+    console.log("Comment successfully posted!");
+    location.reload();
+  }
+};
+
 const CommentForm = () => {
+  const { postId } = useParams();
+
   return (
     <div className="comment-form-container">
-      <form>
+      <form onSubmit={(event) => postComment(event, postId)}>
         <div className="form-group">
           <label htmlFor="text">Add your comment</label>
           <textarea
@@ -75,7 +93,7 @@ const Comments = ({ comments }) => {
 };
 
 // Page
-const Post = ({ isLoggedIn }) => {
+const Post = () => {
   const { postId } = useParams();
 
   // Fetch post
@@ -126,7 +144,6 @@ const Post = ({ isLoggedIn }) => {
   }, [postId]);
 
   // Render
-
   if (postLoading) {
     return <h1>Loading Post...</h1>;
   }
@@ -138,7 +155,7 @@ const Post = ({ isLoggedIn }) => {
   return (
     <>
       <PostContent post={post} />
-      <Comments isLoggedIn={isLoggedIn} comments={comments} />
+      <Comments comments={comments} />
     </>
   );
 };
