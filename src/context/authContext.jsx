@@ -67,4 +67,4 @@ const validateToken = (token) => {
   return user_id && exp > Date.now() / 1000; // Return true for demonstration purposes
 };
 
-export { AuthContext, AuthProvider, validateToken };
+export { AuthContext, AuthProvider };
