@@ -60,9 +60,11 @@ const Home = () => {
     <>
       <h1>Blog Posts</h1>
       <div className="post-card-container">
-        {posts.map((post) => (
-          <PostCard key={post._id} post={post} />
-        ))}
+        {posts
+          .filter((post) => post.isPublished)
+          .map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
       </div>
     </>
   );
