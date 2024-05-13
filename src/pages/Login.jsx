@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { login } from "../api";
-// import { AuthContext } from "../App";
 import { AuthContext } from "../context/authContext";
 
 const Login = () => {
@@ -18,6 +17,7 @@ const Login = () => {
     try {
       const response = await login(username, password);
       if (response.error) {
+        alert("Error logging in. Check console for details.");
         console.log("Error logging in with response...");
         console.error(response);
       } else {
@@ -25,7 +25,7 @@ const Login = () => {
         localStorage.setItem("jwtRefreshToken", response.tokens.refreshToken);
         setAuthenticated(true);
         console.log("Successful login!");
-        window.history.back();
+        window.location.href = "/";
       }
     } catch (err) {
       console.error(err);
