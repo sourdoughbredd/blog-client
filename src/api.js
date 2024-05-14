@@ -1,5 +1,8 @@
 // API base URL
-const BASE_URL = "https://blog-api-bb.fly.dev";
+const BASE_URL =
+  import.meta.env.VITE_ENV === "development"
+    ? import.meta.env.VITE_DEV_API_URL
+    : import.meta.env.VITE_PROD_API_URL;
 
 const getHeaders = () => ({
   Authorization: `Bearer ${localStorage.getItem("jwtAccessToken")}`,
