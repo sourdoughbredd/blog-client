@@ -36,7 +36,6 @@ You can view a live preview of the page [here](https://blog-client-bb.netlify.ap
 
 - JWT-based authentication
 - Context API for user state management
-
 - Conditional rendering based on user authorizations
 - [Blog API](https://github.com/sourdoughbredd/blog-api) interaction
 - React Router for navigation
