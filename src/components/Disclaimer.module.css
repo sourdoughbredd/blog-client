@@ -1,0 +1,19 @@
+.disclaimer {
+  text-align: center;
+  color: rgba(104, 255, 242, 0.663);
+}
+
+.disclaimer h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.disclaimer h3 {
+  font-size: 1.7rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.disclaimer a {
+  text-decoration: underline;
+}
