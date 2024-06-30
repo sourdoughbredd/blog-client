@@ -8,12 +8,14 @@ import Home from "./pages/Home";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Disclaimer from "./components/Disclaimer";
 
 // App Layout Component with context providers
 const Layout = () => {
   return (
     <AuthProvider>
       <Header />
+      <Disclaimer />
       <div id="app-main-content-container">
         <Outlet />
       </div>
